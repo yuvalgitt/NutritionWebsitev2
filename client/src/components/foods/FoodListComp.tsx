@@ -20,7 +20,7 @@ const FoodListComp = ({setFood}:Props) => {
     const fetch = async () => {
       const response = await axios.get(`${serverUrl}/foods`);
       const data = response.data;
-      setFoodData(data.splice(0,13));
+      setFoodData(data.splice(0,12));
       console.log(data);
     };
     fetch();
@@ -33,7 +33,6 @@ const FoodListComp = ({setFood}:Props) => {
     <div className="display-component"
       style={{
         width: "70%",
-        height: "100%",
         marginTop : '-20px'
       }}
     >

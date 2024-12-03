@@ -13,13 +13,11 @@ const FoodGraphicComp = ({displayFood} :Props) => {
     <div
       style={{
         width: "40%",
-        height: "107%",
         borderRadius: "16px",
         marginLeft: "20px",
         display: 'flex',
         flexDirection : 'column',
         alignItems : 'center',
-        marginTop :'-40px'
       }}
     >
       <FoodImageComp displayFood={displayFood} ></FoodImageComp>

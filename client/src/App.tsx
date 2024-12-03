@@ -10,7 +10,8 @@ import ProfileModuleComp from "./components/Profile/ProfileModuleComp";
 import EmptyModule from "./components/header/EmptyModule";
 import AddFoodModule from "./components/foods/AddFood/AddFoodModule";
 import { User } from "./types/types";
-import EatenToday from "./components/Dashboard/today/EatenToday";
+import EatenToday from "./components/today/EatenToday";
+import TodayModuleComp from "./components/today/TodayModuleComp";
 
 function App() {
   const [updateUser, setUpdateUser] = useState<User | undefined>();
@@ -23,13 +24,11 @@ function App() {
     <div
       id="app"
       style={{
-        height: "100%",
         display: "flex",
         justifyContent: "flex-start",
         padding: "10px",
-        top : 0,
         fontFamily: "monospace",
-        width: "100%",
+        transition : "0.2s"
       }}
     >
       <HeaderComp logOut={setUpdateUser} currentUser={updateUser}></HeaderComp>
@@ -47,7 +46,7 @@ function App() {
           path="/Dashboard"
           element={<DashboardModuleComp></DashboardModuleComp>}
         ></Route>
-        <Route path="/eatentoday" element={<EatenToday></EatenToday>} ></Route>
+        <Route path="/eatentoday" element={<TodayModuleComp></TodayModuleComp>} ></Route>
         <Route
           path="/foodList"
           element={<FoodModuleComp></FoodModuleComp>}
