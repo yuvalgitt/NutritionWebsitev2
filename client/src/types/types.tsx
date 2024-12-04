@@ -12,6 +12,7 @@ interface User {
   username: string;
   displayName : string;
   avatarUrl: string;
+  isAdmin: boolean;
 }
 
 export type { Food, User };

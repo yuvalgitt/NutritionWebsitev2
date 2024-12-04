@@ -34,10 +34,10 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
           Database
         </span>{" "}
         <br />
-        <span onClick={() => navigate("/addfood")} className="header-item">
+        {currentUser?.isAdmin && <span onClick={() => navigate("/addfood")} className="header-item">
           {" "}
           Add food
-        </span>
+        </span>}
       </div>
       <h2>Profile</h2>
       {!currentUser && (
