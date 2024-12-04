@@ -24,9 +24,9 @@ function App() {
     <div
       id="app"
       style={{
+        height : "100%",
         display: "flex",
         justifyContent: "flex-start",
-        padding: "10px",
         fontFamily: "monospace",
         transition : "0.2s"
       }}

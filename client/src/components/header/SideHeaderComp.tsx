@@ -15,7 +15,6 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
       className="display-component"
       style={{
         width: "15vw",
-        height: "95%",
         fontSize: "100%",
         display: "flex",
         flexDirection: "column",
