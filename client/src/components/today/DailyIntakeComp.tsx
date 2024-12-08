@@ -25,7 +25,7 @@ const DailyIntakeComp = ({intakeArray} : Props) => {
     }}>
       Total : {totalCalories}
       {intakeArray.map((x : Food) =>{
-        return <div key={x._id}>{x.name} : {x.calories}</div>
+        return <span key={x._id}>{x.name} : {x.calories}</span>
       })}
     </div>
   )
