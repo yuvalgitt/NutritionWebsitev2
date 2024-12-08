@@ -7,9 +7,20 @@ interface Props {
   foodObj: Food;
   setFood?: React.Dispatch<React.SetStateAction<Food | undefined>>;
   setRefresh?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setIntakeArray : React.Dispatch<React.SetStateAction<Food[]>>
+  intakeArray : Food[]
 }
 
-const EatenItemComp = ({ foodObj, setRefresh }: Props) => {
+const EatenItemComp = ({ foodObj, setRefresh , setIntakeArray , intakeArray}: Props) => {
+  const [addedFlag, setAddedFlag] = useState<boolean>(false)
+
+  const handleAdd= () => {
+    if(!addedFlag){
+      setIntakeArray([...intakeArray , foodObj])
+      setAddedFlag(true)
+    }
+  }
+
   return (
     <div
       style={{
@@ -21,6 +32,7 @@ const EatenItemComp = ({ foodObj, setRefresh }: Props) => {
       }}
       className="food-item"
     >
+      
       <span className="food-detail">{foodObj.name}</span>
       <span style={{ color: "lightcoral" }} className="food-detail">
         {" "}
@@ -37,7 +49,7 @@ const EatenItemComp = ({ foodObj, setRefresh }: Props) => {
         {" "}
         {Math.floor(foodObj.fats)} fats{" "}
       </span>
-      <button>+</button>
+      <button onClick={handleAdd} >+</button>
     </div>
   );
 };

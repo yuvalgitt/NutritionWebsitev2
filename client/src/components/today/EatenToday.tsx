@@ -4,7 +4,12 @@ import axios from "axios";
 import serverUrl from "../../config/config";
 import EatenItemComp from "./EatenToday/EatenItemComp";
 
-const EatenToday = () => {
+interface Props {
+  setIntakeArray : React.Dispatch<React.SetStateAction<Food[]>>
+  intakeArray : Food[]
+}
+
+const EatenToday = ({setIntakeArray, intakeArray} : Props) => {
   const [foodArr, setFoodArr] = useState<Food[]>();
   const [searchedFor, setSearchedFor] = useState<string>("");
 
@@ -35,7 +40,7 @@ const EatenToday = () => {
       </center>
       Search : <input onChange={handleSearch} type="text" /> <br />
       {foodArr?.map((x: Food) => {
-        return <EatenItemComp foodObj={x} key={x._id}></EatenItemComp>;
+        return <EatenItemComp intakeArray={intakeArray} setIntakeArray={setIntakeArray} foodObj={x} key={x._id}></EatenItemComp>;
       })}
     </div>
   );
