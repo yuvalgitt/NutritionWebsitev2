@@ -7,10 +7,10 @@ import AddFoodComp from './EatenToday/AddFoodComp'
 
 const TodayModuleComp = () => {
 
-  const [intakeArray, setintakeArray] = useState<Array<[Food,Number]>>([])
+  const [intakeArray, setintakeArray] = useState<Array<[Food,number]>>([])
 
   useEffect( () => {
-    console.log("intakeArray",intakeArray);
+    console.log(intakeArray,"intakearray");
   } ,[intakeArray])
   
   return (

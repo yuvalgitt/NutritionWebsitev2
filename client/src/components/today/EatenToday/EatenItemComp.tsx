@@ -8,8 +8,8 @@ interface Props {
   foodObj: Food;
   setFood?: React.Dispatch<React.SetStateAction<Food | undefined>>;
   setRefresh?: React.Dispatch<React.SetStateAction<number | undefined>>;
-  setIntakeArray : React.Dispatch<React.SetStateAction<Food[]>>
-  intakeArray : [Food, Number][]
+  setIntakeArray : React.Dispatch<React.SetStateAction<[Food, number][]>>
+  intakeArray : [Food, number][]
 }
 
 const EatenItemComp = ({ foodObj, setRefresh , setIntakeArray , intakeArray}: Props) => {
@@ -48,7 +48,7 @@ const EatenItemComp = ({ foodObj, setRefresh , setIntakeArray , intakeArray}: Pr
         {" "}
         {foodObj.fats} fats{" "}
       </span>
-      {pressedAdd && <AddFoodComp foodObj={foodObj} intakeArray={intakeArray} setIntakeArray={setIntakeArray} ></AddFoodComp>}
+      {pressedAdd && <AddFoodComp setPressedAdd={setPressedAdd} foodObj={foodObj} intakeArray={intakeArray} setIntakeArray={setIntakeArray} ></AddFoodComp>}
       <button onClick={handleAdd} >+</button>
     </div>
   );
