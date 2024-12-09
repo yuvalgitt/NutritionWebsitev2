@@ -5,8 +5,8 @@ import serverUrl from "../../config/config";
 import EatenItemComp from "./EatenToday/EatenItemComp";
 
 interface Props {
-  setIntakeArray : React.Dispatch<React.SetStateAction<Food[]>>
-  intakeArray : Food[]
+  setIntakeArray : React.Dispatch<React.SetStateAction<[Food, Number][]>>
+  intakeArray : [Food, Number][]
 }
 
 const EatenToday = ({setIntakeArray, intakeArray} : Props) => {

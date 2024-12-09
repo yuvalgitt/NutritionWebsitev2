@@ -3,10 +3,11 @@ import EatenToday from './EatenToday'
 import DailyIntakeComp from './DailyIntakeComp'
 import { Food } from '../../types/types'
 import { useState } from 'react'
+import AddFoodComp from './EatenToday/AddFoodComp'
 
 const TodayModuleComp = () => {
 
-  const [intakeArray, setintakeArray] = useState<Food[]>([])
+  const [intakeArray, setintakeArray] = useState<Array<[Food,Number]>>([])
 
   useEffect( () => {
     console.log("intakeArray",intakeArray);

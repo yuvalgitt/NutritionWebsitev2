@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Food } from '../../types/types'
 
 interface Props {
-    intakeArray : Food[]
+    intakeArray : [Food, Number][]
 }
 
 const DailyIntakeComp = ({intakeArray} : Props) => {
