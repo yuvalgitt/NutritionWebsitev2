@@ -8,9 +8,10 @@ interface Props {
   setFood?: React.Dispatch<React.SetStateAction<Food | undefined>>;
   modifier?: number;
   setRefresh?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  isAdmin : boolean;
 }
 
-const FoodItemComp = ({ foodObj, setFood, modifier, setRefresh }: Props) => {
+const FoodItemComp = ({ foodObj, setFood, modifier, setRefresh, isAdmin }: Props) => {
   const [isEdit, setIsEdit] = useState<Boolean>(false)
   const [editObj, setEditObj] = useState<Food>(foodObj)
 
@@ -31,17 +32,24 @@ const FoodItemComp = ({ foodObj, setFood, modifier, setRefresh }: Props) => {
     setEditObj({ ...editObj, [type]: +e.target.value });
   }
 
+  const handlePortionSearch = () => {
+    const query = `${foodObj?.name}+portion+size+in+grams`
+    const url = `https://www.google.com/search?q=${query}`
+    window.open(url,'_blank')
+  }
+
   const handleSave = async () => {
     try {
-
+      console.log('editObj',editObj);
+      
       const response = await axios.patch(`${serverUrl}/foods/${editObj._id}`, editObj)
       setIsEdit(false)
-      alert('saved')
 
       const date = new Date()
 
       if (setRefresh)
         setRefresh(date.getTime())
+      
     }
     catch (error) {
       alert(error)
@@ -68,7 +76,7 @@ const FoodItemComp = ({ foodObj, setFood, modifier, setRefresh }: Props) => {
         </span>
         <span style={{ color: "lightgoldenrodyellow" }} className="food-detail">
           {" "}
-          {Math.floor(modifier * foodObj.proteins)} proteins
+          {Math.floor(modifier * foodObj.proteins*10)/10} proteins
         </span>
         <span style={{ color: "lightskyblue" }} className="food-detail">
           {Math.floor(modifier * foodObj.carbohydrates)} carbohydrates
@@ -77,8 +85,7 @@ const FoodItemComp = ({ foodObj, setFood, modifier, setRefresh }: Props) => {
           {" "}
           {Math.floor(modifier * foodObj.fats)} fats{" "}
         </span>
-        <button>+</button>
-        <button onClick={() => setIsEdit(true)} style={{ fontSize: "10px" }}>edit</button>
+        {isAdmin && <button onClick={() => setIsEdit(true)} style={{ fontSize: "10px" }}>edit</button>}
       </div>}
       {/* If user toggles edit function */}
       {isEdit && <div
@@ -108,7 +115,10 @@ const FoodItemComp = ({ foodObj, setFood, modifier, setRefresh }: Props) => {
         </span>
         <span style={{ color: 'lightpink' }}>
           img url <input className="input-edit" type="text" name="imgUrl" defaultValue={foodObj.imgUrl} onChange={handleChange} />
-
+        </span>
+        <span>
+          <button style={{fontSize : "10px"}} defaultValue={foodObj.portionSize} onClick={handlePortionSearch} >Search</button>
+          Portion Size : <input onChange={handleChange} name="portionSize" defaultValue={foodObj.portionSize} type="number" />
         </span>
         <button onClick={handleSave} style={{ fontSize: "10px" }}>Save</button>
       </div>}

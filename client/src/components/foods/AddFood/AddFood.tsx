@@ -36,6 +36,12 @@ const AddFood = ({ setImgUrl }: Props) => {
     window.open(url,'_blank')
   }
 
+  const handlePortionSearch = () => {
+    const query = `${foodObj?.name}+portion+size+in+grams`
+    const url = `https://www.google.com/search?q=${query}`
+    window.open(url,'_blank')
+  }
+
   const handleSubmit = async () => {
     try {
 
@@ -67,6 +73,8 @@ const AddFood = ({ setImgUrl }: Props) => {
       <br />
       <span>fats per 100g : </span>{" "}
       <input onChange={handleChange} name="fats" type="number" /> <br />
+      <span>portion size</span>
+      <input type="number" /> <button onClick={handlePortionSearch} >Search for</button> <br />
       Add image url :{" "}
       <input
         onChange={handleChange}

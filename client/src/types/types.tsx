@@ -6,11 +6,12 @@ interface Food {
   fats: number;
   proteins: number;
   imgUrl?: string;
+  portionSize?: number;
 }
 
 interface User {
   username: string;
-  displayName : string;
+  displayName: string;
   avatarUrl: string;
   isAdmin: boolean;
 }

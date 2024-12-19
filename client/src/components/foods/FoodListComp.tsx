@@ -9,9 +9,11 @@ import "../../styles/styles.css"
 
 interface Props{
   setFood : React.Dispatch<React.SetStateAction<Food | undefined>>
+  isAdmin : boolean;
+  
 }
 
-const FoodListComp = ({setFood}:Props) => {
+const FoodListComp = ({setFood , isAdmin}:Props) => {
   const [foodData, setFoodData] = useState<Food[]>([]);
   const [modifier, setModifier] = useState<number>(1)
   const [refresh, setRefresh] = useState<number>()
@@ -20,7 +22,7 @@ const FoodListComp = ({setFood}:Props) => {
     const fetch = async () => {
       const response = await axios.get(`${serverUrl}/foods`);
       const data = response.data;
-      setFoodData(data.splice(0,12));
+      setFoodData(data);
       console.log(data);
     };
     fetch();
@@ -60,7 +62,7 @@ const FoodListComp = ({setFood}:Props) => {
         <span>Per <input style={{width :'40px'}} defaultValue={100} onChange={handleModifier} type="number" /> grams</span>
           <div>
             {foodData?.map((x: Food) => {
-              return <FoodItemComp setRefresh={setRefresh} modifier={modifier} setFood={setFood} foodObj={x} key={x._id}></FoodItemComp>
+              return <FoodItemComp isAdmin={isAdmin} setRefresh={setRefresh} modifier={modifier} setFood={setFood} foodObj={x} key={x._id}></FoodItemComp>
             })}
           </div>
     </div>

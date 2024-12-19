@@ -15,9 +15,11 @@ import TodayModuleComp from "./components/today/TodayModuleComp";
 
 function App() {
   const [updateUser, setUpdateUser] = useState<User | undefined>();
+  const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
   useEffect(() => {
     console.log(` current user :  ${updateUser?.username}`);
+    updateUser?.isAdmin? setIsAdmin(true) : setIsAdmin(false)
   }, [updateUser]);
 
   return (
@@ -49,7 +51,7 @@ function App() {
         <Route path="/eatentoday" element={<TodayModuleComp></TodayModuleComp>} ></Route>
         <Route
           path="/foodList"
-          element={<FoodModuleComp></FoodModuleComp>}
+          element={<FoodModuleComp isAdmin={isAdmin} ></FoodModuleComp>}
         ></Route>
         <Route
           path="/addFood"

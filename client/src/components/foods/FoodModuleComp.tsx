@@ -4,13 +4,17 @@ import FoodGraphicComp from "./FoodGraphicComp";
 import "../../styles/styles.css";
 import { Food } from "../../types/types";
 
-const FoodModuleComp = () => {
+interface Props {
+  isAdmin : boolean;
+}
+
+const FoodModuleComp = ({isAdmin}:Props) => {
 
   const [selectedItem, setSelectedItem] = useState<Food>()
 
   return (
     <div className="module-invisible">
-      <FoodListComp setFood={setSelectedItem} ></FoodListComp>
+      <FoodListComp isAdmin={isAdmin}  setFood={setSelectedItem} ></FoodListComp>
       <FoodGraphicComp displayFood={selectedItem} ></FoodGraphicComp>
     </div>
   );
