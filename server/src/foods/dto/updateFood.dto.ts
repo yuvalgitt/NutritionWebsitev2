@@ -20,4 +20,8 @@ export class PatchFoodDto {
     @IsOptional()
     @IsString()
     imgUrl? : string
+
+    @IsOptional()
+    @IsNumber()
+    portionSize: number;
 }

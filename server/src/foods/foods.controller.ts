@@ -31,7 +31,7 @@ export class FoodsController {
   getFoodById(@Param('id') id : string) {
     if(!mongoose.Types.ObjectId.isValid(id))
       throw new HttpException('bad request' , 400)
-    return 'you didnt make the service buddy'
+    return this.foodService.getFoodById(id)
   }
 
   @Get('name/:name')

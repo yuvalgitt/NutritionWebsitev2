@@ -19,6 +19,9 @@ export class Food {
 
   @Prop()
   imgUrl : string
+
+  @Prop()
+  portionSize : number;
 }
 
 export const foodSchema = SchemaFactory.createForClass(Food)

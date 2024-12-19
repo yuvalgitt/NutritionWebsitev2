@@ -24,4 +24,8 @@ export class CreateFoodDto {
   @IsNotEmpty()
   @IsNumber()
   proteins: number;
+
+  @IsOptional()
+  @IsNumber()
+  portionSize: number
 }

@@ -19,6 +19,9 @@ export class FoodsService {
   getFoodByName(name: string) {
     return this.foodModel.find({ name: {$regex :  name  ,$options : 'i'}});
   }
+  getFoodById(id : string) {
+    return this.foodModel.findById(id)
+  }
   patchFood(id: string, patchFoodDto: PatchFoodDto) {
     return this.foodModel.findByIdAndUpdate(id, patchFoodDto, { new: true });
   }
