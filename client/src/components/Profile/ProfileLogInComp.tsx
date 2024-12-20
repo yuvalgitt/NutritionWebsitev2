@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../styles/styles.css";
 import { useState } from "react";
 import axios from "axios";
@@ -14,6 +14,9 @@ const ProfileLogInComp = ({ updateUser }: Props) => {
   const navigate = useNavigate();
 
   const [logInObj, setlogInObj] = useState<{}>();
+
+
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const type = e.target.name;

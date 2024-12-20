@@ -22,6 +22,15 @@ function App() {
     updateUser?.isAdmin? setIsAdmin(true) : setIsAdmin(false)
   }, [updateUser]);
 
+  useEffect(()=>{
+    let userData
+    if(sessionStorage.userData)
+    userData = JSON.parse(sessionStorage.userData)
+    if(userData) {
+      setUpdateUser(userData)
+    }
+  },[])
+
   return (
     <div
       id="app"

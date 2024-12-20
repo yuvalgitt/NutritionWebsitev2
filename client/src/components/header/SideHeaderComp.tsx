@@ -5,11 +5,17 @@ import { User } from "../../types/types";
 
 interface Props {
   currentUser: User | undefined;
-  logOut: React.Dispatch<React.SetStateAction<User | undefined>>
+  logOut: React.Dispatch<React.SetStateAction<User | undefined>>;
 }
 
 const HeaderComp = ({ currentUser, logOut }: Props) => {
   const navigate: NavigateFunction = useNavigate();
+
+  const handleLogOut = () => {
+    sessionStorage.userData = ''
+    logOut(undefined)
+  };
+
   return (
     <div
       className="display-component"
@@ -23,7 +29,11 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
     >
       <h2>Dashboard</h2>
       <div className="header-submenu">
-        <span onClick={() => navigate("/eatentoday")} className="header-item"> Today </span> <br />
+        <span onClick={() => navigate("/eatentoday")} className="header-item">
+          {" "}
+          Today{" "}
+        </span>{" "}
+        <br />
         <span onClick={() => navigate("/dashboard")} className="header-item">
           Statistics
         </span>
@@ -34,10 +44,12 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
           Database
         </span>{" "}
         <br />
-        {currentUser?.isAdmin && <span onClick={() => navigate("/addfood")} className="header-item">
-          {" "}
-          Add food
-        </span>}
+        {currentUser?.isAdmin && (
+          <span onClick={() => navigate("/addfood")} className="header-item">
+            {" "}
+            Add food
+          </span>
+        )}
       </div>
       <h2>Profile</h2>
       {!currentUser && (
@@ -53,10 +65,12 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
       {currentUser && (
         <div className="header-submenu">
           {currentUser?.displayName} <br />
-          <img   src={currentUser.avatarUrl} ></img> <br />
+          <img src={currentUser.avatarUrl}></img> <br />
           <span className="header-item">profile settings</span>
           <br />
-          <span  onClick={()=> logOut(undefined)} className="header-item">log out</span>
+          <span onClick={handleLogOut} className="header-item">
+            log out
+          </span>
         </div>
       )}
     </div>
