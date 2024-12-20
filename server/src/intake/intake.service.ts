@@ -16,4 +16,13 @@ export class IntakeService {
     getAllIntakes(){
         return this.intakeModel.find()
     }
+
+    getIntakesById(id : string){
+        return this.intakeModel.find({userForeignKey : id})
+    }
+
+    async removeIntakeById(id : string){
+        const response = await this.intakeModel.findOneAndDelete({ _id : id})
+        return `successfuly removed : ${response}`
+    }
 }
