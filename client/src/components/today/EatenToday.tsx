@@ -5,13 +5,18 @@ import serverUrl from "../../config/config";
 import EatenItemComp from "./EatenToday/EatenItemComp";
 
 interface Props {
-  setIntakeArray : React.Dispatch<React.SetStateAction<[Food, number][]>>
-  intakeArray : [Food, number][]
+  setIntakeArray: React.Dispatch<React.SetStateAction<[Food, number][]>>;
+  intakeArray: [Food, number][];
 }
 
-const EatenToday = ({setIntakeArray, intakeArray} : Props) => {
+const EatenToday = ({ setIntakeArray, intakeArray }: Props) => {
   const [foodArr, setFoodArr] = useState<Food[]>();
   const [searchedFor, setSearchedFor] = useState<string>("");
+
+  const date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let day = date.getDate();
 
   useEffect(() => {
     const fetch = async () => {
@@ -36,11 +41,24 @@ const EatenToday = ({setIntakeArray, intakeArray} : Props) => {
       }}
       className="display-component"
     >
-      <center><h1>Add the foods you have eaten today : <br /></h1>
+      <center>
+        <h3>
+          {day}/{month}/{year}{" "}
+        </h3>
+        <h1>
+          Add the foods you have eaten today : <br />
+        </h1>
       </center>
       Search : <input onChange={handleSearch} type="text" /> <br />
       {foodArr?.map((x: Food) => {
-        return <EatenItemComp intakeArray={intakeArray} setIntakeArray={setIntakeArray} foodObj={x} key={x._id}></EatenItemComp>;
+        return (
+          <EatenItemComp
+            intakeArray={intakeArray}
+            setIntakeArray={setIntakeArray}
+            foodObj={x}
+            key={x._id}
+          ></EatenItemComp>
+        );
       })}
     </div>
   );

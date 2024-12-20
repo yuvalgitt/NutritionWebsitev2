@@ -66,7 +66,7 @@ const AddFoodComp = ({
         onChange={handleChange}
         defaultValue={grams}
       /> grams <button onClick={handleAddInput}>add</button>
-      {foodObj.portionSize && <span> | <button onClick={handleAddOne}> One </button></span> }
+      {foodObj.portionSize && <span> | <button onClick={handleAddOne}> One </button> {foodObj.portionSize} grams</span> }
     </div>
   );
 };

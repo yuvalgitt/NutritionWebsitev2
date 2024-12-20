@@ -13,7 +13,13 @@ const DailyIntakeComp = ({ intakeArray }: Props) => {
       sum += (intakeArray[i][1] * intakeArray[i][0].calories) / 100;
     }
     setTotalCalories(sum);
+    console.table(intakeArray);
+    
   }, [intakeArray]);
+
+  const handleRemove = () =>{
+    alert('addfeature')
+  }
 
   return (
     <div
@@ -41,6 +47,7 @@ const DailyIntakeComp = ({ intakeArray }: Props) => {
             <span style={{ color: "lightgoldenrodyellow" }}>
               {(x[1] * x[0].calories) / 100} calories
             </span>
+            <button onClick={handleRemove} style={{fontSize : '10px'}}>x</button>
           </span>
         );
       })}
