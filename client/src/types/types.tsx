@@ -10,10 +10,23 @@ interface Food {
 }
 
 interface User {
+  _id?: string;
   username: string;
   displayName: string;
   avatarUrl: string;
   isAdmin: boolean;
 }
 
-export type { Food, User };
+
+interface Intake {
+  userForeignKey : string;
+  foodForeignKey : string;
+  amountInGrams : number;
+  date :  {
+    year : number,
+    month : number,
+    day : number
+  }
+}
+
+export type { Food, User ,Intake };

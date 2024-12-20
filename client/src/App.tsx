@@ -57,7 +57,7 @@ function App() {
           path="/Dashboard"
           element={<DashboardModuleComp></DashboardModuleComp>}
         ></Route>
-        <Route path="/eatentoday" element={<TodayModuleComp></TodayModuleComp>} ></Route>
+        <Route path="/eatentoday" element={<TodayModuleComp currentUser={updateUser} ></TodayModuleComp>} ></Route>
         <Route
           path="/foodList"
           element={<FoodModuleComp isAdmin={isAdmin} ></FoodModuleComp>}

@@ -24,7 +24,7 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
       let response;
       if (searchedFor === "") {
         response = await axios.get(`${serverUrl}/foods/`);
-        setFoodData(response.data);
+        setFoodData(response.data.splice(0, 14));
       } else {
         response = await axios.get(`${serverUrl}/foods/name/${searchedFor}`);
         setFoodData(response.data.splice(0, 14));
@@ -41,7 +41,7 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
     const fetch = async () => {
       const response = await axios.get(`${serverUrl}/foods`);
       const data = response.data;
-      setFoodData(data);
+      setFoodData(data.splice(0,14)); 
       console.log(data);
     };
     fetch();

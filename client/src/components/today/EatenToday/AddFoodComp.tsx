@@ -1,33 +1,50 @@
 import React, { useState } from "react";
-import { Food } from "../../../types/types";
+import { Food, Intake, User } from "../../../types/types";
+import axios from "axios";
+import serverUrl from "../../../config/config";
 
 interface Props {
-  setIntakeArray: React.Dispatch<React.SetStateAction<[Food, number][]>>;
-  intakeArray: [Food, number][];
+  setIntakeArray: React.Dispatch<React.SetStateAction<Intake[]>>;
+  intakeArray: Intake[];
   foodObj: Food;
   setPressedAdd: React.Dispatch<React.SetStateAction<boolean>>;
+  currentUser: User | undefined;
 }
 
 const AddFoodComp = ({
   setIntakeArray,
   intakeArray,
   foodObj,
+  currentUser,
   setPressedAdd,
 }: Props) => {
   const [grams, setGrams] = useState<number>(100);
 
-  const handleAddOne = () => {
-    if(foodObj.portionSize)
-      setIntakeArray([...intakeArray, [foodObj, foodObj.portionSize]]);
-    else
-      alert('missing portion size')
-      
+const handleAddInput = async (addPortionSize : boolean) => {
     setPressedAdd(false);
-  };
+    const date = new Date();
 
-  const handleAddInput = () => {
-    setPressedAdd(false);
-    setIntakeArray([...intakeArray, [foodObj, grams]]);
+    if (foodObj._id && currentUser?._id) {
+      const newIntakeObj = {
+        foodForeignKey: foodObj._id,
+        userForeignKey: currentUser._id,
+        amountInGrams: addPortionSize && foodObj.portionSize? foodObj.portionSize : grams,
+        date: {
+          year: date.getFullYear(),
+          month: date.getMonth(),
+          day: date.getDate(),
+        },
+      };
+      setIntakeArray([...intakeArray, newIntakeObj]);
+      try {
+        await axios.post(`${serverUrl}/intake`, newIntakeObj);
+      } catch (e) {
+        alert(e);
+      }
+    }
+    else {
+      alert('must log in')
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,8 +52,8 @@ const AddFoodComp = ({
   };
 
   const handleClose = () => {
-    setPressedAdd(false)
-  }
+    setPressedAdd(false);
+  };
 
   return (
     <div
@@ -51,9 +68,9 @@ const AddFoodComp = ({
         style={{
           zIndex: 2,
           position: "absolute",
-          cursor : "pointer" ,
+          cursor: "pointer",
           marginLeft: "88%",
-          marginTop: "-7%"
+          marginTop: "-7%",
         }}
         onClick={handleClose}
       >
@@ -61,12 +78,19 @@ const AddFoodComp = ({
       </span>
       Specify Amount <br /> <br />
       <input
-        style={{width : '20%'}}
+        style={{ width: "20%" }}
         type="number"
         onChange={handleChange}
         defaultValue={grams}
-      /> grams <button onClick={handleAddInput}>add</button>
-      {foodObj.portionSize && <span> | <button onClick={handleAddOne}> One </button> {foodObj.portionSize} grams</span> }
+      />{" "}
+      grams <button onClick={() => handleAddInput(false)}>add</button>
+      {foodObj.portionSize && (
+        <span>
+          {" "}
+          | <button onClick={() => handleAddInput(true)}> One </button> {foodObj.portionSize}{" "}
+          grams
+        </span>
+      )}
     </div>
   );
 };

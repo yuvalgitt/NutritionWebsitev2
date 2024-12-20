@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Food } from "../../types/types";
+import { Food, Intake, User } from "../../types/types";
 import axios from "axios";
 import serverUrl from "../../config/config";
-import EatenItemComp from "./EatenToday/EatenItemComp";
+import EatenItemComp from "./EatenToday/SelectEatenItemComp";
 
 interface Props {
-  setIntakeArray: React.Dispatch<React.SetStateAction<[Food, number][]>>;
-  intakeArray: [Food, number][];
+  setIntakeArray: React.Dispatch<React.SetStateAction<Intake[]>>;
+  intakeArray: Intake[];
+  currentUser : User | undefined;
 }
 
-const EatenToday = ({ setIntakeArray, intakeArray }: Props) => {
+const EatenToday = ({ setIntakeArray, intakeArray , currentUser }: Props) => {
   const [foodArr, setFoodArr] = useState<Food[]>();
   const [searchedFor, setSearchedFor] = useState<string>("");
 
@@ -53,6 +54,7 @@ const EatenToday = ({ setIntakeArray, intakeArray }: Props) => {
       {foodArr?.map((x: Food) => {
         return (
           <EatenItemComp
+            currentUser={currentUser}
             intakeArray={intakeArray}
             setIntakeArray={setIntakeArray}
             foodObj={x}

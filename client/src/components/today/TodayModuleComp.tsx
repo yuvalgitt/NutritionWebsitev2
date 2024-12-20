@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react'
 import EatenToday from './EatenToday'
 import DailyIntakeComp from './DailyIntakeComp'
-import { Food } from '../../types/types'
+import { Food, Intake, User } from '../../types/types'
 import { useState } from 'react'
 import AddFoodComp from './EatenToday/AddFoodComp'
 
-const TodayModuleComp = () => {
+interface Props {
+  currentUser : User | undefined;
+}
 
-  const [intakeArray, setintakeArray] = useState<Array<[Food,number]>>([])
+const TodayModuleComp = ({currentUser}:Props) => {
 
-  useEffect( () => {
-    console.log(intakeArray,"intakearray");
-  } ,[intakeArray])
+  const [intakeArray, setintakeArray] = useState<Array<Intake>>([])
+  useEffect(()=>{
+    console.log('intakeArray',intakeArray);
+    
+  },[intakeArray])
   
   return (
     <div className='module-invisible' style={{height : "100%"}}>
-    <EatenToday intakeArray={intakeArray} setIntakeArray={setintakeArray} ></EatenToday>
-    <DailyIntakeComp intakeArray={intakeArray} ></DailyIntakeComp>
+    <EatenToday currentUser={currentUser} intakeArray={intakeArray} setIntakeArray={setintakeArray} ></EatenToday>
+    <DailyIntakeComp currentUser={currentUser} intakeArray={intakeArray} ></DailyIntakeComp>
     </div>
   )
 }
