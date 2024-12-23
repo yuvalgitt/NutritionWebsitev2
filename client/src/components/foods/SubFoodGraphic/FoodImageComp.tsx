@@ -12,7 +12,7 @@ const FoodImageComp = ({displayFood} : Props) => {
   return (
     <div className='display-component' style={{
         width: '90%',
-        height :'100%',
+        height :'50%',
         marginTop : '-15px',
         backgroundImage : `url(${foodImage})`,
         transition : '2s',

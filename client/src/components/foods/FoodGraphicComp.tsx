@@ -21,7 +21,7 @@ const FoodGraphicComp = ({displayFood} :Props) => {
       }}
     >
       <FoodImageComp displayFood={displayFood} ></FoodImageComp>
-      <FoodGraphComp></FoodGraphComp>
+      <FoodGraphComp foodObj={displayFood}></FoodGraphComp>
     </div>
   );
 };

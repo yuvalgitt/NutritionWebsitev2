@@ -17,6 +17,10 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
   const [modifier, setModifier] = useState<number>(1);
   const [refresh, setRefresh] = useState<number>();
 
+  useEffect(()=>{
+    setFood(foodData[0])
+  },[foodData])
+
   const [searchedFor, setSearchedFor] = useState<string>("");
 
   useEffect(() => {

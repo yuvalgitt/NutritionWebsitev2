@@ -70,7 +70,7 @@ const DailyIntakeComp = ({ intakeArray, currentUser }: Props) => {
           <span key={index}>
             {x[1]} grams of {x[0].name} {""}
             <span style={{ color: "lightgoldenrodyellow" }}>
-              {x[0].calories} calories
+              {x[0].calories * x[1] /100} calories
             </span>
             <button
               onClick={() => handleRemove(x[2])}
