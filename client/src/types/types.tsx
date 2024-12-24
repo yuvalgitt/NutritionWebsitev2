@@ -17,16 +17,25 @@ interface User {
   isAdmin: boolean;
 }
 
-
 interface Intake {
-  userForeignKey : string;
-  foodForeignKey : string;
-  amountInGrams : number;
-  date :  {
-    year : number,
-    month : number,
-    day : number
-  }
+  userForeignKey: string;
+  foodForeignKey: string;
+  amountInGrams: number;
+  date: {
+    year: number;
+    month: number;
+    day: number;
+    hour: number;
+    minute: number;
+  };
 }
 
-export type { Food, User ,Intake };
+interface DateObj {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+}
+
+export type { Food, User, Intake , DateObj};

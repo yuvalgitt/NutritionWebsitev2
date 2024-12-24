@@ -105,4 +105,9 @@ input {
   border-radius: 10px;
   box-shadow: inset 0 -2px 5px black;
   padding: 5px;
+  width: 25%;
+}
+
+span {
+  font-size: large;
 }

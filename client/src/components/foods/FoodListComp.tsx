@@ -28,10 +28,10 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
       let response;
       if (searchedFor === "") {
         response = await axios.get(`${serverUrl}/foods/`);
-        setFoodData(response.data.splice(0, 14));
+        setFoodData(response.data);
       } else {
         response = await axios.get(`${serverUrl}/foods/name/${searchedFor}`);
-        setFoodData(response.data.splice(0, 14));
+        setFoodData(response.data);
       }
     };
     fetch();
@@ -45,7 +45,7 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
     const fetch = async () => {
       const response = await axios.get(`${serverUrl}/foods`);
       const data = response.data;
-      setFoodData(data.splice(0,14)); 
+      setFoodData(data); 
       console.log(data);
     };
     fetch();
@@ -74,6 +74,7 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
         <span>
           Search{" "}
           <input
+            style={{width : '100%'}}
             placeholder="Food name"
             onChange={handleSearch}
             className="input-bar"
@@ -105,7 +106,7 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
         />{" "}
         grams
       </span>
-      <div>
+      <div style={{overflow : "auto" , height : '80%'}}>
         {foodData?.map((x: Food) => {
           return (
             <FoodItemComp

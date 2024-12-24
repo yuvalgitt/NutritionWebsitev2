@@ -7,10 +7,10 @@ import EatenItemComp from "./EatenToday/SelectEatenItemComp";
 interface Props {
   setIntakeArray: React.Dispatch<React.SetStateAction<Intake[]>>;
   intakeArray: Intake[];
-  currentUser : User | undefined;
+  currentUser: User | undefined;
 }
 
-const EatenToday = ({ setIntakeArray, intakeArray , currentUser }: Props) => {
+const EatenToday = ({ setIntakeArray, intakeArray, currentUser }: Props) => {
   const [foodArr, setFoodArr] = useState<Food[]>();
   const [searchedFor, setSearchedFor] = useState<string>("");
 
@@ -25,7 +25,7 @@ const EatenToday = ({ setIntakeArray, intakeArray , currentUser }: Props) => {
       if (searchedFor === "") response = await axios.get(`${serverUrl}/foods/`);
       else response = await axios.get(`${serverUrl}/foods/name/${searchedFor}`);
 
-      setFoodArr(response.data.splice(0, 12));
+      setFoodArr(response.data);
     };
     fetch();
   }, [searchedFor]);
@@ -51,17 +51,19 @@ const EatenToday = ({ setIntakeArray, intakeArray , currentUser }: Props) => {
         </h1>
       </center>
       Search : <input onChange={handleSearch} type="text" /> <br />
-      {foodArr?.map((x: Food) => {
-        return (
-          <EatenItemComp
-            currentUser={currentUser}
-            intakeArray={intakeArray}
-            setIntakeArray={setIntakeArray}
-            foodObj={x}
-            key={x._id}
-          ></EatenItemComp>
-        );
-      })}
+      <div style={{overflow : 'auto' , height : '85%'}}>
+        {foodArr?.map((x: Food) => {
+          return (
+            <EatenItemComp
+              currentUser={currentUser}
+              intakeArray={intakeArray}
+              setIntakeArray={setIntakeArray}
+              foodObj={x}
+              key={x._id}
+            ></EatenItemComp>
+          );
+        })}
+      </div>
     </div>
   );
 };

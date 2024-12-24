@@ -66,6 +66,7 @@ const FoodItemComp = ({ foodObj, setFood, modifier, setRefresh, isAdmin }: Props
           marginBottom: "8px",
           marginLeft: "25px",
           display: "flex",
+          justifyContent : "space-evenly"
         }}
         className="food-item"
         onClick={handleSelect}>

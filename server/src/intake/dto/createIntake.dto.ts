@@ -16,5 +16,5 @@ export class CreateIntakeDto {
 
   @IsNotEmpty()
   @IsObject()
-  date: { day: number; month: number; year: number };
+  date: { day: number; month: number; year: number , hour : number ,minute : number };
 }

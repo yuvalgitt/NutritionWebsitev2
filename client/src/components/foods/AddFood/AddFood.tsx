@@ -58,12 +58,14 @@ const AddFood = ({ setImgUrl }: Props) => {
     <div
       style={{
         width: "50%",
+        display : 'flex',
+        flexDirection : "column"
       }}
       className="display-component"
     >
       <h1>Add food details</h1>
       <span>Name : </span>
-      <input onChange={handleChange} name="name" type="text" /> <button onClick={handleSearch} >search for</button><br />
+      <input onChange={handleChange} name="name" type="text" /> <button onClick={handleSearch} >search for {foodObj?.name}'s nutritional value</button><br />
       <span>Kcal per 100g : </span>
       <input onChange={handleChange} name="calories" type="number" /> <br />
       <span>proteins per 100g : </span>{" "}
@@ -74,7 +76,7 @@ const AddFood = ({ setImgUrl }: Props) => {
       <span>fats per 100g : </span>{" "}
       <input onChange={handleChange} name="fats" type="number" /> <br />
       <span>portion size</span>
-      <input type="number" /> <button onClick={handlePortionSearch} >Search for</button> <br />
+      <input type="number" /> <button onClick={handlePortionSearch} >Search for {foodObj?.name}'s average portion size </button> <br />
       Add image url :{" "}
       <input
         onChange={handleChange}

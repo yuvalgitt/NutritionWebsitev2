@@ -17,6 +17,8 @@ export class Intake {
 
   @Prop({
     type: {
+      minute : { type: Number, required: true },
+      hour : { type: Number, required: true },
       day: { type: Number, required: true },
       month: { type: Number, required: true },
       year: { type: Number, required: true },

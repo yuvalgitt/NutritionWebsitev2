@@ -33,6 +33,8 @@ const handleAddInput = async (addPortionSize : boolean) => {
           year: date.getFullYear(),
           month: date.getMonth(),
           day: date.getDate(),
+          hour : date.getHours(),
+          minute : date.getMinutes(),
         },
       };
       setIntakeArray([...intakeArray, newIntakeObj]);
