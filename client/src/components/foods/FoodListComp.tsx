@@ -17,9 +17,9 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
   const [modifier, setModifier] = useState<number>(1);
   const [refresh, setRefresh] = useState<number>();
 
-  useEffect(()=>{
-    setFood(foodData[0])
-  },[foodData])
+  useEffect(() => {
+    setFood(foodData[0]);
+  }, [foodData]);
 
   const [searchedFor, setSearchedFor] = useState<string>("");
 
@@ -45,14 +45,19 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
     const fetch = async () => {
       const response = await axios.get(`${serverUrl}/foods`);
       const data = response.data;
-      setFoodData(data); 
+      setFoodData(data);
       console.log(data);
     };
     fetch();
   }, [refresh]);
 
   const handleModifier = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setModifier(+e.target.value / 100);
+    let value : number | string = e.target.value
+    if (+value < 100000)
+       setModifier(+value / 100);
+      else {
+        value = "10000"
+      }
   };
   return (
     <div
@@ -74,7 +79,7 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
         <span>
           Search{" "}
           <input
-            style={{width : '100%'}}
+            style={{ width: "100%" }}
             placeholder="Food name"
             onChange={handleSearch}
             className="input-bar"
@@ -82,31 +87,17 @@ const FoodListComp = ({ setFood, isAdmin }: Props) => {
           />
         </span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginRight: "150px",
-        }}
-      >
-        <span>Name</span>
-        <span style={{ color: "lightcoral" }}>Kcal</span>
-        <span style={{ color: "wheat" }}>Proteins</span>
-        <span style={{ color: "lightblue" }}>Carbohydrates</span>
-        <span style={{ color: "lightgreen" }}>Fats</span>
-      </div>
-
       <span>
         Per{" "}
         <input
-          style={{ width: "40px" }}
+          style={{ width: "90px" }}
           defaultValue={100}
           onChange={handleModifier}
           type="number"
         />{" "}
         grams
       </span>
-      <div style={{overflow : "auto" , height : '80%'}}>
+      <div style={{ overflow: "auto", height: "80%" }}>
         {foodData?.map((x: Food) => {
           return (
             <FoodItemComp

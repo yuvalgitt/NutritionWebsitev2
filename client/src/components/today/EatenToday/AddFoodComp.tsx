@@ -20,7 +20,7 @@ const AddFoodComp = ({
 }: Props) => {
   const [grams, setGrams] = useState<number>(100);
 
-const handleAddInput = async (addPortionSize : boolean) => {
+  const handleAddInput = async (addPortionSize: boolean) => {
     setPressedAdd(false);
     const date = new Date();
 
@@ -28,13 +28,14 @@ const handleAddInput = async (addPortionSize : boolean) => {
       const newIntakeObj = {
         foodForeignKey: foodObj._id,
         userForeignKey: currentUser._id,
-        amountInGrams: addPortionSize && foodObj.portionSize? foodObj.portionSize : grams,
+        amountInGrams:
+          addPortionSize && foodObj.portionSize ? foodObj.portionSize : grams,
         date: {
           year: date.getFullYear(),
           month: date.getMonth(),
           day: date.getDate(),
-          hour : date.getHours(),
-          minute : date.getMinutes(),
+          hour: date.getHours(),
+          minute: date.getMinutes(),
         },
       };
       setIntakeArray([...intakeArray, newIntakeObj]);
@@ -43,9 +44,8 @@ const handleAddInput = async (addPortionSize : boolean) => {
       } catch (e) {
         alert(e);
       }
-    }
-    else {
-      alert('must log in')
+    } else {
+      alert("must log in");
     }
   };
 
@@ -60,8 +60,9 @@ const handleAddInput = async (addPortionSize : boolean) => {
   return (
     <div
       style={{
-        position: "absolute",
-        zIndex: "1",
+        position: "fixed",
+        zIndex: "2",
+        cursor: "default",
         marginLeft: "30%",
       }}
       className="display-component"
@@ -78,7 +79,8 @@ const handleAddInput = async (addPortionSize : boolean) => {
       >
         <h3>X</h3>
       </span>
-      Specify Amount <br /> <br />
+      Specify Amount of{" "}
+      <span style={{ color: "lightblue" }}>{foodObj.name}</span> <br /> <br />
       <input
         style={{ width: "20%" }}
         type="number"
@@ -89,8 +91,8 @@ const handleAddInput = async (addPortionSize : boolean) => {
       {foodObj.portionSize && (
         <span>
           {" "}
-          | <button onClick={() => handleAddInput(true)}> One </button> {foodObj.portionSize}{" "}
-          grams
+          | <button onClick={() => handleAddInput(true)}> One </button>{" "}
+          {foodObj.portionSize} grams
         </span>
       )}
     </div>

@@ -45,7 +45,7 @@ const FoodGraphComp = ({ foodObj }: Props) => {
           <span style={{ color: "lightblue", fontSize: "25px" }}>
             {" "}
             {label} per 100g :{" "}
-            <span style={{ color: "lightgreen" }}>{payload[0].value}</span>{" "}
+            <span style={{ color: "lightgreen" , fontSize : '25px' }}>{payload[0].value}</span>{" "}
           </span>
         </div>
       );

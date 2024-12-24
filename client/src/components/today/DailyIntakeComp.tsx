@@ -51,9 +51,10 @@ const DailyIntakeComp = ({ intakeArray, currentUser, time }: Props) => {
       }
     };
     fetch();
-  }, [, intakeArray, refresh]);
+    setRefresh(new Date().getTime());
+  }, [,intakeArray, refresh]);
 
-  return (
+  return (  
     <div
       className="display-component"
       style={{
