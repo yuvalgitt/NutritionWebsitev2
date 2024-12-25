@@ -16,8 +16,13 @@ interface Props {
 const EatenItemComp = ({ foodObj, setRefresh , setIntakeArray , intakeArray , currentUser}: Props) => {
   const [addedFlag, setAddedFlag] = useState<boolean>(false)
   const [pressedAdd, setPressedAdd] = useState<boolean>(false)
+  const [cursorCoordinates, setCursorCoordinates] = useState<{x : number , y : number}>({x: 0 , y : 0})
 
-  const handleAdd= () => {
+  const handleCursorMovement = (event  : React.MouseEvent<HTMLDivElement>) =>{
+    setCursorCoordinates({ x : event.clientX , y : event.clientY})
+  }
+
+  const handleAdd= (  ) => {
       setPressedAdd(true)
   }
 
@@ -31,6 +36,7 @@ const EatenItemComp = ({ foodObj, setRefresh , setIntakeArray , intakeArray , cu
         display: "flex",
       }}
       className="food-item"
+      onMouseMove={handleCursorMovement}
     >
       
       <span className="food-detail">{foodObj.name}</span>
@@ -49,7 +55,7 @@ const EatenItemComp = ({ foodObj, setRefresh , setIntakeArray , intakeArray , cu
         {" "}
         {foodObj.fats} fats{" "}
       </span>
-      {pressedAdd && <AddFoodComp currentUser={currentUser} setPressedAdd={setPressedAdd} foodObj={foodObj} intakeArray={intakeArray} setIntakeArray={setIntakeArray} ></AddFoodComp>}
+      {pressedAdd && <AddFoodComp cursor={cursorCoordinates} currentUser={currentUser} setPressedAdd={setPressedAdd} foodObj={foodObj} intakeArray={intakeArray} setIntakeArray={setIntakeArray} ></AddFoodComp>}
       <button onClick={handleAdd} >+</button>
     </div>
   );

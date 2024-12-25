@@ -12,10 +12,6 @@ interface Props {
 const TodayModuleComp = ({currentUser}:Props) => {
 
   const [intakeArray, setintakeArray] = useState<Array<Intake>>([])
-  useEffect(()=>{
-    console.log('intakeArray',intakeArray);
-    
-  },[intakeArray])
   
   return (
     <div className='module-invisible' style={{height : "100%"}}>

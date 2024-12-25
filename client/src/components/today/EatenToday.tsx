@@ -44,7 +44,7 @@ const EatenToday = ({ setIntakeArray, intakeArray, currentUser }: Props) => {
     >
       <center>
         <h3>
-          {day}/{month}/{year}{" "}
+          {day}/{month+1}/{year}{" "}
         </h3>
         <h1>
           Add the foods you have eaten today : <br />

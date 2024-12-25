@@ -8,23 +8,34 @@ import axios from "axios";
 import serverUrl from "../../config/config";
 
 interface Props {
-  currentUser : User
+  currentUser : User | undefined
 }
 
 const DashboardModuleComp = ({currentUser}:Props) => {
-  const [allUserIntakes, setAllUserIntakes] = useState<Intake[]>([])
-  const [MonthlyIntakes, setMonthlyIntakes] = useState<Intake[]>([])
-  const [DailyIntakes, setDailyIntakes] = useState<Intake[]>([])
+  const [monthlyIntakes, setMonthlyIntakes] = useState<Intake[]>([])
+  const [dailyIntakes, setDailyIntakes] = useState<Intake[]>([])
 
   useEffect(()=>{
     const fetchIntakes = async() => {
-      let response = await axios.get(`${serverUrl}/intake/${currentUser._id}`)
-      response = response.data
-      if(Array.isArray(response))
-        setAllUserIntakes(response)
-      else {
-        console.log('invalid response , not array');
+      const date = new Date()
+      if(currentUser) {
+        let response = await axios.get(`${serverUrl}/intake/${currentUser._id}/${date.getFullYear()}/${date.getMonth()}`)
+        response = response.data
         
+        if(Array.isArray(response))
+          setMonthlyIntakes(response)
+        else {
+          console.log('invalid response , not array');
+        }
+        response = await axios.get(`${serverUrl}/intake/${currentUser._id}/${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`)
+        response = response.data
+        
+        if(Array.isArray(response))
+          setDailyIntakes(response)
+        
+        else {
+          console.log('invalid response , not array');
+        }
       }
     }
     fetchIntakes()
@@ -38,8 +49,8 @@ const DashboardModuleComp = ({currentUser}:Props) => {
         height :'97.3%'
       }}
     >
-      <DailyStatsComp></DailyStatsComp>
-      <MonthlyStatsComp></MonthlyStatsComp>
+      <DailyStatsComp intakeArray={dailyIntakes} ></DailyStatsComp>
+      <MonthlyStatsComp intakeArray={monthlyIntakes} ></MonthlyStatsComp>
     </div>
   );
 };

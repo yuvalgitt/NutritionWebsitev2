@@ -42,7 +42,7 @@ export class IntakeController {
       throw new HttpException('invalid request', 400);
     }
 
-    return 'implement feature';
+    return this.intakeService.getIntakesByYearMonth(id , year , month );
   }
 
   @Get(':id/:year/:month/:day')

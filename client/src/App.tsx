@@ -55,7 +55,7 @@ function App() {
         ></Route>
         <Route
           path="/Dashboard"
-          element={<DashboardModuleComp></DashboardModuleComp>}
+          element={<DashboardModuleComp currentUser={updateUser} ></DashboardModuleComp>}
         ></Route>
         <Route path="/eatentoday" element={<TodayModuleComp currentUser={updateUser} ></TodayModuleComp>} ></Route>
         <Route

@@ -6,10 +6,9 @@ import serverUrl from "../../config/config";
 interface Props {
   intakeArray: Intake[];
   currentUser: User | undefined;
-  time: DateObj;
 }
 
-const DailyIntakeComp = ({ intakeArray, currentUser, time }: Props) => {
+const DailyIntakeComp = ({ intakeArray, currentUser }: Props) => {
   const [totalCalories, setTotalCalories] = useState<number>(0);
   const [displayIntakeArray, setDisplayIntakeArray] = useState<
     Array<[Food, number, string, DateObj]>
@@ -17,10 +16,10 @@ const DailyIntakeComp = ({ intakeArray, currentUser, time }: Props) => {
   const [refresh, setRefresh] = useState<number>();
 
   const handleRemove = async (id: string) => {
+    const date = new Date();
     try {
-      let response = await axios.delete(`${serverUrl}/intake/${id}`);
+      let response = await axios.delete(`${serverUrl}/intake/${id}/`);
       console.log(response.data);
-      const date = new Date();
       setRefresh(date.getTime());
     } catch (error) {
       alert(error);
@@ -29,10 +28,11 @@ const DailyIntakeComp = ({ intakeArray, currentUser, time }: Props) => {
 
   useEffect(() => {
     const fetch = async () => {
+      const date = new Date()
       let response, data;
       let foodArray: [Food, number, string, DateObj][] = [];
       if (currentUser) {
-        response = await axios.get(`${serverUrl}/intake/${currentUser._id}`);
+        response = await axios.get(`${serverUrl}/intake/${currentUser._id}/${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`);
         let sum = 0;
         data = response.data;
         for (let i = 0; i < data.length; i++) {
@@ -78,8 +78,8 @@ const DailyIntakeComp = ({ intakeArray, currentUser, time }: Props) => {
       {displayIntakeArray?.map((x: [Food, number, string, DateObj], index) => {
         return (
           <span key={index}>
-            at {x[3].hour}:{x[3].minute} |
-            {x[1]} grams of {x[0].name} {""}
+            {x[3].hour}:{x[3].minute} |
+            {x[1]}g of {x[0].name} {""}
             <span style={{ color: "lightgoldenrodyellow" }}>
               {(x[0].calories * x[1]) / 100} calories
             </span>

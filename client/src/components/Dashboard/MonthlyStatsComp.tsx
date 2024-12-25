@@ -1,7 +1,14 @@
 import React from 'react'
 import "../../styles/styles.css"
+import { Intake } from '../../types/types'
 
-const MonthlyStatsComp = () => {
+interface Props {
+  intakeArray : Intake[]
+}
+
+const MonthlyStatsComp = ({intakeArray}:Props) => {
+
+
   return (
     <div  style={{
         marginTop :'2%',

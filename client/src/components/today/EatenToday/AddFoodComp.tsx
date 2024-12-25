@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Food, Intake, User } from "../../../types/types";
 import axios from "axios";
 import serverUrl from "../../../config/config";
@@ -9,6 +9,10 @@ interface Props {
   foodObj: Food;
   setPressedAdd: React.Dispatch<React.SetStateAction<boolean>>;
   currentUser: User | undefined;
+  cursor: {
+    x: number;
+    y: number;
+  };
 }
 
 const AddFoodComp = ({
@@ -17,8 +21,15 @@ const AddFoodComp = ({
   foodObj,
   currentUser,
   setPressedAdd,
+  cursor,
 }: Props) => {
   const [grams, setGrams] = useState<number>(100);
+  const [coordinates, setCoordinates] = useState<{x : number, y: number}>({x : 0 , y :0})
+
+  useEffect(()=>{
+    console.log('cursor',cursor);
+    setCoordinates(cursor)
+  },[])
 
   const handleAddInput = async (addPortionSize: boolean) => {
     setPressedAdd(false);
@@ -54,14 +65,17 @@ const AddFoodComp = ({
   };
 
   const handleClose = () => {
+    
     setPressedAdd(false);
   };
 
   return (
     <div
       style={{
-        position: "fixed",
-        zIndex: "2",
+        position: "absolute",
+        zIndex: "1",
+        top: coordinates.y-20,
+        left: coordinates.x/2 - 75,
         cursor: "default",
         marginLeft: "30%",
       }}

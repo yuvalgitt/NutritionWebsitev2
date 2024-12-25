@@ -12,8 +12,8 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
   const navigate: NavigateFunction = useNavigate();
 
   const handleLogOut = () => {
-    sessionStorage.userData = ''
-    logOut(undefined)
+    sessionStorage.userData = "";
+    logOut(undefined);
   };
 
   return (
@@ -34,9 +34,11 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
           Today{" "}
         </span>{" "}
         <br />
-        <span onClick={() => navigate("/dashboard")} className="header-item">
-          Statistics
-        </span>
+        {currentUser && (
+          <span onClick={() => navigate("/dashboard")} className="header-item">
+            Statistics
+          </span>
+        )}
       </div>
       <h2>Food</h2>
       <div className="header-submenu">
