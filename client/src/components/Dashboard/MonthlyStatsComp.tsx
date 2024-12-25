@@ -28,20 +28,13 @@ const MonthlyStatsComp = ({intakeArray}:Props) => {
       map.set(x.date.day,x.amountInGrams*food.calories/100 + (temp? temp : 0))
     }
     map.forEach((value,key)=>{
-      console.log('key | value' , key , value);
       extractedData.push({
         dayOfMonth :key,
         calories :value
       })
     })
 
-    console.log('monthly',extractedData);
-    // for(let i = 1 ;i < extractedData.length ; i++){
-    //   const x = extractedData[i]
-    //   const y = extractedData[i-1]
-
-    //   if(x.dayOfMonth > )
-    // }
+    extractedData.sort((a, b) => a.dayOfMonth - b.dayOfMonth)
     
     setMonthlyGraphData(extractedData)
   }
