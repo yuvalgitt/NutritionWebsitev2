@@ -14,6 +14,7 @@ interface Props {
 const DashboardModuleComp = ({currentUser}:Props) => {
   const [monthlyIntakes, setMonthlyIntakes] = useState<Intake[]>([])
   const [dailyIntakes, setDailyIntakes] = useState<Intake[]>([])
+  const [refresh, setRefresh] = useState<number>(0)
 
   useEffect(()=>{
     const fetchIntakes = async() => {
@@ -39,7 +40,7 @@ const DashboardModuleComp = ({currentUser}:Props) => {
       }
     }
     fetchIntakes()
-  },[])
+  },[, refresh])
 
   return (
     <div
@@ -49,7 +50,7 @@ const DashboardModuleComp = ({currentUser}:Props) => {
         height :'97.3%'
       }}
     >
-      <DailyStatsComp intakeArray={dailyIntakes} ></DailyStatsComp>
+      <DailyStatsComp refresh={setRefresh} intakeArray={dailyIntakes} ></DailyStatsComp>
       <MonthlyStatsComp intakeArray={monthlyIntakes} ></MonthlyStatsComp>
     </div>
   );

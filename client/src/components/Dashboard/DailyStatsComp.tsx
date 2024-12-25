@@ -16,9 +16,10 @@ import serverUrl from "../../config/config";
 
 interface Props {
   intakeArray: Intake[];
+  refresh: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const DailyStatsComp = ({ intakeArray }: Props) => {
+const DailyStatsComp = ({ intakeArray, refresh }: Props) => {
   const [dailyGraphData, setDailyGraphData] =
     useState<{ time: string; content: object }[]>();
 
@@ -26,26 +27,30 @@ const DailyStatsComp = ({ intakeArray }: Props) => {
     let extractedData = [];
     for (let i = 0; i < intakeArray.length; i++) {
       const x = intakeArray[i];
-      const food: Food = await (
-        await axios.get(`${serverUrl}/foods/${x.foodForeignKey}`)
-      ).data;
+      const food: Food = await (await axios.get(`${serverUrl}/foods/${x.foodForeignKey}`)).data;
 
       extractedData[i] = {
         time: `${x.date.hour}:${x.date.minute}`,
         content: {
-          calories: (x.amountInGrams * food.calories) / 100,
+          calories: (x.amountInGrams * food.calories / 100),
           name: food.name,
         },
       };
     }
-    console.log("daily", dailyGraphData);
 
     setDailyGraphData(extractedData);
   };
 
   useEffect(() => {
+    refresh(new Date().getTime());
+    console.log('intake',intakeArray);
+    
     extractData();
-  }, [, intakeArray]);
+  }, []);
+
+  useEffect(() => {
+    extractData();
+  }, [intakeArray]);
 
   const customToolTip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -77,10 +82,9 @@ const DailyStatsComp = ({ intakeArray }: Props) => {
         <LineChart data={dailyGraphData}>
           <XAxis stroke="lightgreen" dataKey="time"></XAxis>
           <YAxis stroke="lightgreen" dataKey="content.calories"></YAxis>
-          <Legend></Legend>
           <CartesianGrid strokeDasharray={"3 10"}></CartesianGrid>
           <Tooltip content={customToolTip}></Tooltip>
-          <Line dataKey="content.calories" type={"monotone"}></Line>
+          <Line   fill="lightblue" dataKey="content.calories" type={"monotone"}></Line>
         </LineChart>
       </ResponsiveContainer>
     </div>
