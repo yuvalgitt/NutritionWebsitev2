@@ -34,7 +34,7 @@ const MonthlyStatsComp = ({intakeArray}:Props) => {
       })
     })
 
-    extractedData.sort((a, b) => a.dayOfMonth - b.dayOfMonth)
+    extractedData.sort((a : any, b: any) => a.dayOfMonth - b.dayOfMonth)
     
     setMonthlyGraphData(extractedData)
   }
@@ -59,7 +59,7 @@ const MonthlyStatsComp = ({intakeArray}:Props) => {
         marginTop :'2%',
         height : '35.5%'
     }} className='display-component'
-    >
+    > <h1 style={{zIndex : '4' , position : 'absolute' , opacity : '0.6'}} >Monthly</h1>
       <ResponsiveContainer>
         <BarChart data={monthlyGraphData}  >
           <Legend></Legend>

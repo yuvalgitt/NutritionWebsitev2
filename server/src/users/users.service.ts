@@ -11,7 +11,14 @@ export class UsersService {
 
   createUser(createUserDto: CreateUserDto) {
     const newUser = new this.userModel(createUserDto);
-    return newUser.save();
+    try {
+
+      newUser.save();
+      return `new user created : ${newUser.username}`
+    }
+    catch (error) {
+      return error
+    }
   }
 
   getUsers() {

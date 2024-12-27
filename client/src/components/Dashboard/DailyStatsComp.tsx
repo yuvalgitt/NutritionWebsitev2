@@ -77,7 +77,7 @@ const DailyStatsComp = ({ intakeArray, refresh }: Props) => {
         marginTop: "-1.25%",
       }}
       className="display-component"
-    >
+    > <h1 style={{zIndex : '4' , position : 'absolute', opacity : '0.6'}} >daily</h1>
       <ResponsiveContainer>
         <LineChart data={dailyGraphData}>
           <XAxis stroke="lightgreen" dataKey="time"></XAxis>

@@ -61,7 +61,7 @@ const HeaderComp = ({ currentUser, logOut }: Props) => {
           </span>{" "}
           <br />
           <br />
-          <span className="header-item">Sign up</span>
+          <span  onClick={()=>navigate("/signup")} className="header-item">Sign up</span>
         </div>
       )}
       {currentUser && (

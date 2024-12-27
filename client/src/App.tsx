@@ -12,34 +12,34 @@ import AddFoodModule from "./components/foods/AddFood/AddFoodModule";
 import { User } from "./types/types";
 import EatenToday from "./components/today/EatenToday";
 import TodayModuleComp from "./components/today/TodayModuleComp";
+import ProfileSignUpComp from "./components/Profile/ProfileSignUpComp";
 
 function App() {
   const [updateUser, setUpdateUser] = useState<User | undefined>();
-  const [isAdmin, setIsAdmin] = useState<boolean>(false)
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
     console.log(` current user :  ${updateUser?.username}`);
-    updateUser?.isAdmin? setIsAdmin(true) : setIsAdmin(false)
+    updateUser?.isAdmin ? setIsAdmin(true) : setIsAdmin(false);
   }, [updateUser]);
 
-  useEffect(()=>{
-    let userData
-    if(sessionStorage.userData)
-    userData = JSON.parse(sessionStorage.userData)
-    if(userData) {
-      setUpdateUser(userData)
+  useEffect(() => {
+    let userData;
+    if (sessionStorage.userData) userData = JSON.parse(sessionStorage.userData);
+    if (userData) {
+      setUpdateUser(userData);
     }
-  },[])
+  }, []);
 
   return (
     <div
       id="app"
       style={{
-        height : "100%",
+        height: "100%",
         display: "flex",
         justifyContent: "flex-start",
         fontFamily: "monospace",
-        transition : "0.2s"
+        transition: "0.2s",
       }}
     >
       <HeaderComp logOut={setUpdateUser} currentUser={updateUser}></HeaderComp>
@@ -54,13 +54,22 @@ function App() {
           }
         ></Route>
         <Route
-          path="/Dashboard"
-          element={<DashboardModuleComp currentUser={updateUser} ></DashboardModuleComp>}
+          path="/signup"
+          element={<ProfileSignUpComp></ProfileSignUpComp>}
         ></Route>
-        <Route path="/eatentoday" element={<TodayModuleComp currentUser={updateUser} ></TodayModuleComp>} ></Route>
+        <Route
+          path="/Dashboard"
+          element={
+            <DashboardModuleComp currentUser={updateUser}></DashboardModuleComp>
+          }
+        ></Route>
+        <Route
+          path="/eatentoday"
+          element={<TodayModuleComp currentUser={updateUser}></TodayModuleComp>}
+        ></Route>
         <Route
           path="/foodList"
-          element={<FoodModuleComp isAdmin={isAdmin} ></FoodModuleComp>}
+          element={<FoodModuleComp isAdmin={isAdmin}></FoodModuleComp>}
         ></Route>
         <Route
           path="/addFood"

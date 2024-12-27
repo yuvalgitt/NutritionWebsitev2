@@ -15,6 +15,8 @@ interface User {
   displayName: string;
   avatarUrl: string;
   isAdmin: boolean;
+  password?: string;
+  dateOfBirth :{year : number , month : number , day : number}
 }
 
 interface Intake {
@@ -38,4 +40,4 @@ interface DateObj {
   minute: number;
 }
 
-export type { Food, User, Intake , DateObj};
+export type { Food, User, Intake, DateObj };

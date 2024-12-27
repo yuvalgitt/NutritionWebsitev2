@@ -24,7 +24,7 @@ const AddFoodComp = ({
   cursor,
 }: Props) => {
   const [grams, setGrams] = useState<number>(100);
-  const [coordinates, setCoordinates] = useState<{x : number, y: number}>({x : 0 , y :0})
+  const [coordinates, setCoordinates] = useState<{x : number, y: number}>({x : -50 , y :-50})
 
   useEffect(()=>{
     console.log('cursor',cursor);
@@ -78,6 +78,7 @@ const AddFoodComp = ({
         left: coordinates.x/2 - 75,
         cursor: "default",
         marginLeft: "30%",
+        transition : '0.6s' 
       }}
       className="display-component"
     >
