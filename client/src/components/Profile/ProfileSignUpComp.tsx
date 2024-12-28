@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { User } from "../../types/types";
 import axios from "axios";
 import serverUrl from "../../config/config";
+import { useNavigate } from "react-router-dom";
 
-const ProfileSignUpComp = () => {
+interface Props {
+  updateUser : React.Dispatch<React.SetStateAction<User | undefined>>
+}
+
+const ProfileSignUpComp = ({updateUser}:Props) => {
   const [signUpObj, setSignUpObj] = useState<User>({
     avatarUrl: "https://cdn-icons-png.flaticon.com/512/219/219983.png",
     displayName: "",
@@ -15,6 +20,8 @@ const ProfileSignUpComp = () => {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate =  useNavigate()
 
   const date = new Date();
   const year = date.getFullYear();
@@ -42,6 +49,21 @@ const ProfileSignUpComp = () => {
     }
   };
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(`${serverUrl}/users/login`, signUpObj);
+      let data = response.data;
+      console.log(data ? data : "incorrect details");
+      if (data) {
+        sessionStorage.userData = JSON.stringify(data);
+        updateUser(data);
+        navigate("/");
+      }
+    } catch {
+      alert("error");
+    }
+  };
+
   const handleSubmit = async () => {
     console.log("submit", signUpObj);
 
@@ -53,6 +75,7 @@ const ProfileSignUpComp = () => {
       let response = await axios.post(`${serverUrl}/users`, signUpObj);
       response = response.data;
       alert(response);
+      handleLogin()
     } catch (e) {
       alert(e);
     }

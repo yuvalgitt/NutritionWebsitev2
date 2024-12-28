@@ -9,11 +9,10 @@ import { PatchUserDto } from './dto/patchUser.dto';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  createUser(createUserDto: CreateUserDto) {
+  async createUser(createUserDto: CreateUserDto) {
     const newUser = new this.userModel(createUserDto);
     try {
-
-      newUser.save();
+      await newUser.save();
       return `new user created : ${newUser.username}`
     }
     catch (error) {

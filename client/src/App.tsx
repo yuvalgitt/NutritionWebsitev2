@@ -55,7 +55,7 @@ function App() {
         ></Route>
         <Route
           path="/signup"
-          element={<ProfileSignUpComp></ProfileSignUpComp>}
+          element={<ProfileSignUpComp  updateUser={setUpdateUser}></ProfileSignUpComp>}
         ></Route>
         <Route
           path="/Dashboard"

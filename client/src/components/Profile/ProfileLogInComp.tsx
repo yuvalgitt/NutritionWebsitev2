@@ -24,7 +24,7 @@ const ProfileLogInComp = ({ updateUser }: Props) => {
     try {
       const response = await axios.post(`${serverUrl}/users/login`, logInObj);
       let data = response.data;
-      console.log(data ? data : "incorrect details");
+      alert(data ? data : "incorrect details");
       if (data) {
         sessionStorage.userData = JSON.stringify(data);
         updateUser(data);
@@ -74,7 +74,6 @@ const ProfileLogInComp = ({ updateUser }: Props) => {
           Log in
         </button>{" "}
         <br /> <br />
-        forgot password? <a style={{backgroundColor : 'white'}} href=""> forgot password</a>
       </div>
 
       <div style={{ marginTop: "1%" }}>
